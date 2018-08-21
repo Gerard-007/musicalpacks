@@ -17,9 +17,9 @@ import cloudinary.uploader
 import cloudinary.api
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'hoezb3yx8',
-    'API_KEY': '968258776189841',
-    'API_SECRET': 'va6c5SlY1jJzGDX1k5iONYgBkdk',
+    'CLOUD_NAME': 'hwz12fud7',
+    'API_KEY': '314466862822259',
+    'API_SECRET': 'fzM2SW-kUAm8dcA3gvLIhO5IGu4',
 }
 
 SEND_GRID_API_KEY = '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'
