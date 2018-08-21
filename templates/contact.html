@@ -1,0 +1,144 @@
+{% extends "layout.html" %}
+{% load widget_tweaks %}
+
+{% block title %}contact_us{% endblock title %}
+
+{% block content %}
+<!-- Section: Contact v.3 -->
+<section class="contact-section my-5 container">
+
+  <!-- Form with header -->
+  <div class="card">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-lg-8">
+
+        <!-- Header -->
+
+      {% if confirm_message %}
+
+        <div class="text-center mt-6">
+          <p class="mt-4">{{ confirm_message }}<i class="fa fa-check pr-2"></i></p>
+        </div>
+
+      {% endif %}
+
+
+      {% if contact_form %}
+
+        <form method="POST" action="" class="card-body form">
+          {% csrf_token %}
+          {{ contact_form.non_field_errors }}
+          {{ contact_form.source.errors }}
+          {{ contact_form.source }}
+
+          <h3 class="mt-4"><i class="fa fa-envelope pr-2"></i>{{title}}</h3>
+
+          <!-- Grid row -->
+          <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-6">
+              <div class="md-form mb-0">
+                {% render_field contact_form.name type="text" id="form-contact-name" name="contact_form.name" class="form-control" %}
+                {{ contact_form.name.errors }}
+                <label for="form-contact-name" class="">{{contact_form.name.label}}</label>
+              </div>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-6">
+              <div class="md-form mb-0">
+                {% render_field contact_form.email type="text" id="form-contact-name" name="contact_form.email" class="form-control" %}
+                {{ contact_form.email.errors }}
+                <label for="form-contact-email" class="">{{contact_form.email.label}}</label>
+              </div>
+            </div>
+            <!-- Grid column -->
+
+          </div>
+          <!-- Grid row -->
+
+
+
+          <!-- Grid row -->
+          <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-12">
+              <div class="md-form mb-0">
+                <!-- <textarea type="text" id="form-contact-message" class="form-control md-textarea" rows="3"></textarea> -->
+              {% render_field contact_form.comment type="text" id="form-contact-name" name="contact_form.comment" class="form-control" %}
+              {{ contact_form.comment.errors }}
+                <label for="form-contact-message">Message</label>
+                <button type="submit" class="btn btn-primary btn-md">
+                  <i class="fa fa-send"> send</i>
+                </button>
+              </div>
+            </div>
+            <!-- Grid column -->
+
+          </div>
+          <!-- Grid row -->
+        </form>
+
+      {% endif %}
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-lg-4">
+
+        <div class="card-body contact text-center h-100 white-text">
+
+          <h3 class="my-4 pb-2">Contact information</h3>
+          <ul class="text-lg-left list-unstyled ml-4">
+            <li>
+              <p><i class="fa fa-map-marker pr-2"></i>Lagos, Nigeria</p>
+            </li>
+            <li>
+              <p><i class="fa fa-phone pr-2"></i>+2348186612324</p>
+            </li>
+            <li>
+              <p><i class="fa fa-envelope pr-2"></i>info.musicadence.com</p>
+            </li>
+          </ul>
+          <hr class="hr-light my-4">
+          <ul class="list-inline text-center list-unstyled">
+            <li class="list-inline-item">
+              <a class="p-2 fa-lg tw-ic">
+                <i class="fa fa-twitter"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="p-2 fa-lg li-ic">
+                <i class="fa fa-linkedin"> </i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="p-2 fa-lg ins-ic">
+                <i class="fa fa-instagram"> </i>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Form with header -->
+
+</section>
+<!-- Section: Contact v.3 -->
+
+{% endblock content %}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load cloudinary %}
+
+{% url 'home' as home %}
+{% if request.path == home %}
+    <html lang="en" class="full-height">
+    {% else %}
+    <html lang="en">
+{% endif %}
+
+{% load static %}
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>{% block title %}{% endblock title %} | musicadence</title>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+        <!-- Bootstrap core CSS -->
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+        <!-- Material Design Bootstrap -->
+        <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+
+        <!-- Your custom styles (optional) -->
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+        <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+
+
+    <body>
+
+      <header>
+        {% include "navbar.html" %}
+      </header>
+
+          {% if request.path == home %}
+            <br>
+            <hr class="style-two">
+          {% endif %}
+
+          <!-- Start your project here-->
+          {% block content %}
+
+          {% endblock %}
+          <!-- /Start your project here-->
+
+        {% include "footer.html" %}
+
+        <!-- SCRIPTS -->
+        <!-- JQuery -->
+        <script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+    </body>
+
+</html>

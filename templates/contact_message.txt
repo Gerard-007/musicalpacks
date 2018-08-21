@@ -1,0 +1,11 @@
+You recieved a message from your contact form, from:
+
+{{ user }}
+
+This is what they send:
+
+{{ message }}
+
+Reply this email:
+
+{{ email }}

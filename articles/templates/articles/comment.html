@@ -1,0 +1,42 @@
+<!--Comments-->
+<div class="card card-comments mb-3 wow fadeIn">
+  {% with comments.count as total_comments %}
+      <div class="card-header font-weight-bold">{{ total_comments }} Comment{{ total_comments|pluralize }}</div>
+  {% endwith %}
+    <div class="card-body">
+
+      <div class="media d-block d-md-flex">
+            <img class="d-flex rounded-circle img-fluid avatar z-depth-1-half mb-3 mx-auto" src="https://mdbootstrap.com/img/Others/documentation/img (20)-mini.jpg" alt="Avatar">
+            <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                <h5 class="mt-0 font-weight-bold blue-text">Anna Smith</h5>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in
+                vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec
+                lacinia congue felis in faucibus.
+
+                <div class="media d-block d-md-flex mt-3 shadow-textarea">
+                    <img class="d-flex rounded-circle avatar z-depth-1-half mb-3 mx-auto" src="https://mdbootstrap.com/img/Others/documentation/img (3)-mini.jpg" alt="Generic placeholder image">
+                    <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                        <h5 class="mt-0 font-weight-bold blue-text mb-3">Danny Tatuum</h5>
+                        <div class="form-group basic-textarea rounded-corners mb-md-0 mb-4">
+                            <textarea class="form-control z-depth-1" id="exampleFormControlTextarea3" rows="3" placeholder="Write your comment..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% for comment in comments %}
+        <div class="media d-block d-md-flex">
+            <!-- <img class="d-flex rounded-circle avatar z-depth-1-half mb-3 mx-auto" src="https://mdbootstrap.com/img/Others/documentation/img (2)-mini.jpg" alt="Avatar"> -->
+            <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                <h5 class="mt-0 font-weight-bold blue-text">comment {{ forloop.counter }} by {{ comment.author }} {{ comment.created }}</h5>
+                <p>{{ comment.content|linebreaks }}</p>
+        {% empty %}
+                <p>No comments yet, be the first to comment this post!.</p>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+<!--/.Comments-->
