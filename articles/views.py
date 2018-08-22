@@ -13,13 +13,14 @@ from .models import Article, Comment
 class ArticleList(generic.CreateView, generic.ListView):
 	fields = ("author", "title", "body", "published")
 	model = Article
-	context_object_name = 'Article'
+	context_object_name = 'articles'
+	paginate_by = 6
 	template_name = "articles/article_list.html"
 
 class ArticleDetail(generic.DetailView, generic.UpdateView):
 	fields = ("author", "title", "body", "published")
 	model = Article
-	context_object_name = 'Article'
+	context_object_name = 'article'
 	template_name = 'articles/article_detail.html'
 
 class ArticleCreate(LoginRequiredMixin, generic.CreateView):
@@ -44,16 +45,17 @@ class ArticleDelete(LoginRequiredMixin, generic.DeleteView):
 		return self.model.objects.all()
 
 class CreateArticleComment(generic.CreateView):
-    model = Comment
-    fields = ('body',)
+	model = Comment
+	fields = ('body',)
+	context_object_name = 'comments'
 
-    def post_valid(self, form):
-        article = get_object_or_404(Article, slug=article.slug) # Replaced 'Post' with 'Article'
-        articlecomment = form.save(commit=False)
-        articlecomment.user = self.request.user
-        articlecomment.article = article
-        articlecomment.save()
-        return redirect('articles:article_detail', slug=article.slug)
+	def post_valid(self, form):
+		article = get_object_or_404(Article, slug=article.slug)
+		articlecomment = form.save(commit=False)
+		articlecomment.user = self.request.user
+		articlecomment.article = article
+		articlecomment.save()
+		return redirect('articles:article_detail', slug=article.slug)
 
-    def get_success_url(self):
-        return reverse_lazy('articles:article_list')
+	def get_success_url(self):
+		return reverse_lazy('articles:article_list')
