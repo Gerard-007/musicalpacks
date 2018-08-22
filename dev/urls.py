@@ -37,5 +37,6 @@ urlpatterns = [
 
 
 urlpatterns += staticfiles_urlpatterns()
-if settings.DEBUG:
-	urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# Remove this conditional check if you want to upload to Heroku
+# if settings.DEBUG:
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
