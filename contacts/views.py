@@ -10,13 +10,14 @@ from django.core.mail import send_mail
 #Create your views here.
 
 def contact(request):
-    title = 'Test title Contact'
+    title = 'Send us a message'
     contact_form = contactForm(request.POST or None)
     confirm_message = None
 
     if contact_form.is_valid():
         comment = contact_form.cleaned_data['comment']
         name = contact_form.cleaned_data['name']
+        phone = contact_form.cleaned_data['phone']
         subject = 'Contact email recieved from musicadence.com'
         message = '{} {}'.format(name, comment)
         emailFrom = contact_form.cleaned_data['email']
