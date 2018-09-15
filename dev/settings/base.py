@@ -22,12 +22,6 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': 'fzM2SW-kUAm8dcA3gvLIhO5IGu4'
 }
 
-# CLOUDINARY = {
-#   'cloud_name': 'hwz12fud7',
-#   'api_key': '314466862822259',
-#   'api_secret': 'fzM2SW-kUAm8dcA3gvLIhO5IGu4',
-# }
-
 SEND_GRID_API_KEY = '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'
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'geetechcypher@gmail.com'
@@ -69,9 +63,9 @@ INSTALLED_APPS = [
     # Third Party apps
     'cloudinary_storage',
     'cloudinary',
-    # 'cloudinary_storage',
     'storages',
     'widget_tweaks',
+    'pagedown',
     'ckeditor',
     'ckeditor_uploader',
 

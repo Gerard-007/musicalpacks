@@ -24,7 +24,7 @@ from . import views
 
 urlpatterns = [
     url(r"^$", home, name="home"),
-    url(r"^admin/", include(admin.site.urls)),
+    url(r"^admin_musicadence_18nov1990/", include(admin.site.urls)),
     url(r"^contact/$", contact, name="contact"),
     # This uses the login views created in views.py
     url(r"^accounts/", include("accounts.urls", namespace="accounts")),
