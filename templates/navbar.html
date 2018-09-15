@@ -3,169 +3,80 @@
 {% url 'articles:article_list' as article_list %}
 {% url 'contact' as contact %}
 
-<!--Main Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-dark indigo fixed-top scrolling-navbar">
-        <div class="container">
-            <a class="navbar-brand clearfix" href="{% url 'home' %}" id="navbar_site_icon">
-                <img src="{% static 'img/musicadence.png' %}" class="img-fluid" alt="musicadence icon" style="width:40%; height:20%">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-                <ul class="navbar-nav mr-auto">
 
-                  {% if request.path == home %}
-                    <li class="nav-item active">
-                  {% else %}
-                    <li class="nav-item">
-                  {% endif %}
-                        <a class="nav-link" href="{% url 'home' %}">home</a>
-                    </li>
+    <!--     *********     HEADER 1      *********      -->
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">lessons</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">community</a>
-                    </li>
+    <div class="header-1">
+        <nav class="navbar navbar-expand-lg navbar-transparent bg-primary navbar-absolute">
+            <div class="container">
+                <div class="navbar-translate">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar-primary" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar bar1"></span>
+                        <span class="navbar-toggler-bar bar2"></span>
+                        <span class="navbar-toggler-bar bar3"></span>
+                    </button>
+                    <a class="navbar-brand text-left" href="#pablo"><img src="{% static 'img/icons/musicadence.png' %}" style="width:80px; height:50px;" alt="musicadence.com"> musicadence</a>
+                </div>
 
-                    {% if request.path == article_list %}
-                      <li class="nav-item active">
-                    {% else %}
-                      <li class="nav-item">
-                    {% endif %}
-                        <a class="nav-link" href="{% url 'articles:article_list' %}">blog</a>
-                    </li>
+                <div class="collapse navbar-collapse" id="example-navbar-primary">
+                    <ul class="navbar-nav mx-auto">
 
-                    {% if request.path == contact %}
-                      <li class="nav-item active">
-                    {% else %}
-                      <li class="nav-item">
-                    {% endif %}
-                        <a class="nav-link" href="{% url 'contact' %}">contact</a>
-                      </li>
+                      {% if request.path == home %}
+                        <li class="nav-item active">
+                      {% else %}
+                        <li class="nav-item">
+                      {% endif %}
+                            <a class="nav-link" href="{% url 'home' %}">home</a>
+                        </li>
 
-                </ul>
-                <form class="form-inline">
-                        <div class="md-form mt-0">
-                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">lessons</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">community</a>
+                        </li>
+
+                        {% if request.path == article_list %}
+                          <li class="nav-item active">
+                        {% else %}
+                          <li class="nav-item">
+                        {% endif %}
+                            <a class="nav-link" href="{% url 'articles:article_list' %}">blog</a>
+                        </li>
+
+                        {% if request.path == contact %}
+                          <li class="nav-item active">
+                        {% else %}
+                          <li class="nav-item">
+                        {% endif %}
+                            <a class="nav-link" href="{% url 'contact' %}">contact</a>
+                          </li>
+                    </ul>
+
+                    <!--Login navigation...-->
+                    {% if user.is_authenticated %}
+                        <div class="author">
+                             <img src="{{user.avatar.url}}" alt="{{user.username}}" class="rounded-circle avatar img-raised" style="width:25px; height:25px">
+                             <span>@{{user.username}}</span>
                         </div>
-                </form>
-            </div>
-        </div>
-    </nav>
+                    {% else %}
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fa fa-user"></i>
+                                login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fa fa-user-plus"></i>
+                                register
+                            </a>
+                        </li>
+                    </ul>
+                    {% endif %}
 
 
-    {% if request.path == home %}
-        <!--Intro Section-->
-        <section class="view custom-gradient"
-                style="background-image: url('https://res.cloudinary.com/hoezb3yx8/image/upload/v1525869561/musicadence/img/choir.jpg');
-                background-repeat: no-repeat;
-                background-size: cover;
-                background-position: center center;
-                ">
-            <div class="full-bg-img">
-                <div class="container flex-center">
-                    <div class="d-flex align-items-center content-height">
-                        <div class="row flex-center pt-5 mt-3">
-                            <div class="col-md-6 text-center text-md-left mb-5">
-                                <div class="white-text">
-                                    <h1 class="h1-responsive font-weight-bold wow fadeInLeft" data-wow-delay="0.3s">Sign up right now and learn! </h1>
-                                    <hr class="hr-light mb-5 wow fadeInLeft" data-wow-delay="0.3s">
-                                    <h6 class="wow fadeInLeft" data-wow-delay="0.3s">
-                                     Welcome to the amaizing cadenced music tutorials on the net.
-                                     Here, we train and educates choiristers all over the world.
-                                     No matter your level in your choral group we have the
-                                     basic tutorials for different levels of choiristers available.
-                                     we will be providing you with amaizing features like questions
-                                     and giving feedbacks to all your questions, We have highly
-                                     qualified experts available to attend to your questions
-                                     in order to meet your expectation.</h6>
-                                    <br>
-                                    <a class="btn btn-outline-white wow fadeInLeft" data-wow-delay="0.3s">GET STARTED</a>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 col-xl-5">
-                              <!--Form-->
-                              <div class="card wow fadeInRight" data-wow-delay="0.3s" style="background-color: rgba(126, 123, 215, 0.2);">
-                                  <div class="card-body">
-                                      <!--Header-->
-                                      <div class="text-center">
-                                          <h3 class="white-text">
-                                              <i class="fa fa-user white-text"></i> Register:</h3>
-                                          <hr class="hr-light">
-                                      </div>
-
-                                      <!--Body-->
-                                      <div class="md-form">
-                                          <i class="fa fa-user prefix white-text"></i>
-                                          <input type="text" id="form3" class="form-control white-text">
-                                          <label for="form3" class="white-text">Your name</label>
-                                      </div>
-                                      <div class="md-form">
-                                          <i class="fa fa-envelope prefix white-text"></i>
-                                          <input type="text" id="form2" class="form-control white-text">
-                                          <label for="form2" class="white-text">Your email</label>
-                                      </div>
-
-                                      <div class="md-form">
-                                          <i class="fa fa-lock prefix white-text active"></i>
-                                          <input type="password" id="form4" class="form-control white-text">
-                                          <label for="form4" class="white-text">Your password</label>
-                                      </div>
-
-                                      <div class="md-form">
-                                          <i class="fa fa-lock prefix white-text"></i>
-                                          <input type="password" id="Form-pass5" class="form-control white-text">
-                                          <label for="Form-pass5" class="white-text">confirm password</label>
-                                          <div class="form-check">
-                                              <input class="form-check-input" type="checkbox" value="" id="defaultCheck17">
-                                              <label class="form-check-label white-text" for="defaultCheck17">Accept the
-                                                  <a href="#" class="blue-text font-weight-bold"> Terms and Conditions</a>
-                                              </label>
-                                          </div>
-                                      </div>
-
-                                      <div class="text-center mt-4">
-                                          <button type='button' class="btn btn-outline-white wow fadeInLeft" data-wow-delay="0.3s">Register</button>
-                                          <hr class="hr-light mb-3 mt-4">
-                                          <!-- social media login...
-                                          <div class="inline-ul text-center d-flex justify-content-center">
-                                              <a class="p-2 m-2 tw-ic">
-                                                  <i class="fa fa-twitter white-text"></i>
-                                              </a>
-                                              <a class="p-2 m-2 li-ic">
-                                                  <i class="fa fa-linkedin white-text"> </i>
-                                              </a>
-                                              <a class="p-2 m-2 ins-ic">
-                                                  <i class="fa fa-instagram white-text"> </i>
-                                              </a>
-                                          </div>
-                                          -->
-                                      </div>
-
-
-                                      <!--Grid column-->
-                                      <div class="col-md-12">
-                                          <p class="font-small white-text d-flex justify-content-end">Have an account?
-                                              <a href="#" class="blue-text ml-1 font-weight-bold"> Log in</a>
-                                          </p>
-                                      </div>
-                                      <!--Grid column-->
-
-                                  </div>
-                              </div>
-                              <!--/.Form-->
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
-        </section>
-    {% endif %}
-
-
-<!--// Main Navigation-->
+        </nav>

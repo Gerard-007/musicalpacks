@@ -19,8 +19,14 @@ import cloudinary.api
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'hwz12fud7',
     'API_KEY': '314466862822259',
-    'API_SECRET': 'fzM2SW-kUAm8dcA3gvLIhO5IGu4',
+    'API_SECRET': 'fzM2SW-kUAm8dcA3gvLIhO5IGu4'
 }
+
+# CLOUDINARY = {
+#   'cloud_name': 'hwz12fud7',
+#   'api_key': '314466862822259',
+#   'api_secret': 'fzM2SW-kUAm8dcA3gvLIhO5IGu4',
+# }
 
 SEND_GRID_API_KEY = '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'
 EMAIL_HOST = 'smtp.sendgrid.net'
@@ -45,7 +51,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 SECRET_KEY = 'k@!2j4=)qvxlb7f@k^scnp#_sxe6enu30@$#(@694w5t993ps#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -61,6 +67,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Third Party apps
+    'cloudinary_storage',
     'cloudinary',
     # 'cloudinary_storage',
     'storages',

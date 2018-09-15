@@ -7,12 +7,13 @@ from django.db.models.signals import pre_save, post_save
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.utils.text import slugify
-# from ckeditor.fields import RichTextField
+from cloudinary.models import CloudinaryField
+from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 
 
 def upload_dir(instance, filename):
-    return "{}/{}".format(instance.id, filename)
+    return "{}/{}".format(instance.author, filename)
 
 class ArticleQuerySet(models.query.QuerySet):
     def not_draft(self):
@@ -45,7 +46,7 @@ class Article(models.Model):
     title = models.CharField(max_length=255)
     image = models.ImageField(upload_to=upload_dir, blank=True, null=True)
     slug = models.SlugField(max_length=255)
-    body = RichTextUploadingField(blank=True, null=True,)
+    body = RichTextField(blank=True, null=True)
     created = models.DateTimeField(default=timezone.now)
     draft = models.BooleanField(default=True)
     published = models.DateTimeField(blank=True, null=True)
@@ -59,13 +60,21 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
-    def get_img_url(self, default_path="../imgs/musicadence.jpg"):
+    def get_img_url(self, default_path="../img/icons/musicadence.jpg"):
         if self.image:
             return self.image
         return default_path
 
+    """ Informative name for model """
+    def __unicode__(self):
+        try:
+            public_id = self.image.public_id
+        except AttributeError:
+            public_id = ''
+            return "Photo <{}:{}>".format(self.title, public_id)
+
     def get_absolute_url(self):
-        return reverse("articles:detail", kwargs={"slug": self.slug})
+        return reverse("articles:article_detail", kwargs={"slug": self.slug})
 
     class Meta:
         ordering = ('-published',)

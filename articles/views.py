@@ -6,7 +6,7 @@ from django.views import generic
 # from django.views.generic import CreateView, ListView
 
 #from . import mixins
-from .models import Article, Comment
+from .models import Category, Article, Comment
 
 
 
@@ -24,12 +24,20 @@ class ArticleDetail(generic.DetailView, generic.UpdateView):
 	template_name = 'articles/article_detail.html'
 
 class ArticleCreate(LoginRequiredMixin, generic.CreateView):
-	fields = ("author", "title", "body", "published")
+	fields = ("category", "title", "body", "published")
 	model = Article
+	template_name = 'articles/article_form.html'
+
+	def form_valid(self, form):
+		form.instance.author = self.request.user
+		form.save()
+		return super(ArticleCreate, self).form_valid(form)
 
 class ArticleUpdate(LoginRequiredMixin, generic.UpdateView):
-	fields = ("author", "title", "body", "published")
+	fields = ("category", "title", "body", "published")
 	model = Article
+	template_name = 'articles/article_form.html'
+
 	# Here we print out the name of the page updated
 	def get_page_title(self):
 		obj = self.get_object()
