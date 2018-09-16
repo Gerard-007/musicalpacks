@@ -22,17 +22,21 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': 'fzM2SW-kUAm8dcA3gvLIhO5IGu4'
 }
 
-SEND_GRID_API_KEY = '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'
+SEND_GRID_API_KEY = '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'
 EMAIL_HOST = 'smtp.sendgrid.net'
+# EMAIL_HOST = 'mail.musicadence.com'
 EMAIL_HOST_USER = 'geetechcypher@gmail.com'
 EMAIL_HOST_PASSWORD = '18nov1990'
-EMAIL_PORT = '587'
+EMAIL_PORT = '25'
 EMAIL_USE_TLS = True
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_PORT = '465'
+# EMAIL_USE_SSL = True
+# DEFAULT_FROM_EMAIL = 'info@musicadence.com'
 # EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 # EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 # ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Contact email recieved from musicadence.com'
-# DEFAULT_FROM_EMAIL = 'info@musicadence.com'
-# EMAIL_BACKEND = 'django.core.mail.backend.smtp.EmailBackend'
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -45,7 +49,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 SECRET_KEY = 'k@!2j4=)qvxlb7f@k^scnp#_sxe6enu30@$#(@694w5t993ps#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 

@@ -23,8 +23,8 @@ CLOUDINARY_STORAGE = {
 }
 
 SEND_GRID_API_KEY = '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'
-# EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST = 'mail.musicadence.com'
+EMAIL_HOST = 'smtp.sendgrid.net'
+# EMAIL_HOST = 'mail.musicadence.com'
 EMAIL_HOST_USER = 'geetechcypher@gmail.com'
 EMAIL_HOST_PASSWORD = '18nov1990'
 EMAIL_PORT = '25'
