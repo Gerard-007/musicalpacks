@@ -33,7 +33,6 @@ class Category(models.Model):
 
 	class Meta:
 		verbose_name_plural = "Categories"
-
 	def __str__(self):
 		return self.name
 
@@ -44,6 +43,7 @@ class Category(models.Model):
 class Article(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, null=True)
     image = models.ImageField(upload_to=upload_dir, blank=True, null=True)
     slug = models.SlugField(max_length=255)
     body = RichTextField(blank=True, null=True)
