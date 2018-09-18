@@ -1,82 +1,184 @@
 {% load static %}
 {% url 'home' as home %}
 {% url 'articles:article_list' as article_list %}
+{% url 'articles:article_dashboard' as article_dashboard %}
 {% url 'contact' as contact %}
 
 
-    <!--     *********     HEADER 1      *********      -->
+{% if request.path == article_dashboard %}
 
-    <div class="header-1">
-        <nav class="navbar navbar-expand-lg navbar-transparent bg-primary navbar-absolute">
-            <div class="container">
-                <div class="navbar-translate">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar-primary" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-bar bar1"></span>
-                        <span class="navbar-toggler-bar bar2"></span>
-                        <span class="navbar-toggler-bar bar3"></span>
-                    </button>
-                    <a class="navbar-brand text-left" href="#pablo"><img src="{% static 'img/icons/musicadence.png' %}" style="width:80px; height:50px;" alt="musicadence.com"> musicadence</a>
+    <div class="sidebar" data-color="blue">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+    -->
+    <div class="logo">
+      <a class="navbar-brand text-left" href="{% url 'home' %}"><img src="{% static 'img/icons/musicadence.png' %}" style="width:80px; height:50px;" alt="musicadence.com"> musicadence</a>
+    </div>
+    <div class="sidebar-wrapper">
+      <ul class="nav">
+
+        <li>
+          <a href="./map.html">
+            <i class="fa fa-map"></i>
+            <p>Maps</p>
+          </a>
+        </li>
+        <li>
+          <a href="./user.html">
+            <i class="fa fa-user"></i>
+            <p>User Profile</p>
+          </a>
+        </li>
+        {% if user.is_superuser %}
+        <li class="active ">
+          <a href="{% url 'articles:article_dashboard' %}">
+            <i class="fa fa-table"></i>
+            <p>Table List</p>
+          </a>
+        </li>
+        {% endif %}
+
+      </ul>
+    </div>
+  </div>
+  <div class="main-panel">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-wrapper">
+          <div class="navbar-toggle">
+            <button type="button" class="navbar-toggler">
+              <span class="navbar-toggler-bar bar1"></span>
+              <span class="navbar-toggler-bar bar2"></span>
+              <span class="navbar-toggler-bar bar3"></span>
+            </button>
+          </div>
+          <a class="navbar-brand" href="#pablo">Aricles Dashboard</a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+          <form>
+            <div class="input-group no-border">
+              <input type="text" value="" class="form-control" placeholder="Search...">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <i class="fa fa-search-plus"></i>
                 </div>
+              </div>
+            </div>
+          </form>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <div class="author">
+                   <img src="{{user.avatar.url}}" alt="{{user.username}}" class="rounded-circle avatar img-raised" style="width:25px; height:25px">
+                   <span>{{user.username}}</span>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#pablo">
+                <i class="fa fa-users_single-02"></i>
+                <p>
+                  <span class="d-lg-none d-md-block">Account</span>
+                </p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="panel-header panel-header-sm">
+    </div>
+{% else %}
 
-                <div class="collapse navbar-collapse" id="example-navbar-primary">
-                    <ul class="navbar-nav mx-auto">
+  <!--     *********     HEADER 1      *********      -->
 
-                      {% if request.path == home %}
+  <div class="header-1">
+      <nav class="navbar navbar-expand-lg navbar-transparent bg-primary navbar-absolute">
+          <div class="container">
+              <div class="navbar-translate">
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar-primary" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-bar bar1"></span>
+                      <span class="navbar-toggler-bar bar2"></span>
+                      <span class="navbar-toggler-bar bar3"></span>
+                  </button>
+                  <a class="navbar-brand text-left" href="#pablo"><img src="{% static 'img/icons/musicadence.png' %}" style="width:80px; height:50px;" alt="musicadence.com"> musicadence</a>
+              </div>
+
+              <div class="collapse navbar-collapse" id="example-navbar-primary">
+                  <ul class="navbar-nav mx-auto">
+
+                    {% if request.path == home %}
+                      <li class="nav-item active">
+                    {% else %}
+                      <li class="nav-item">
+                    {% endif %}
+                          <a class="nav-link" href="{% url 'home' %}">home</a>
+                      </li>
+
+                      <li class="nav-item">
+                          <a class="nav-link" href="#">lessons</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="#">community</a>
+                      </li>
+
+                      {% if request.path == article_list %}
                         <li class="nav-item active">
                       {% else %}
                         <li class="nav-item">
                       {% endif %}
-                            <a class="nav-link" href="{% url 'home' %}">home</a>
-                        </li>
+                          <a class="nav-link" href="{% url 'articles:article_list' %}">blog</a>
+                      </li>
 
+                      {% if request.path == contact %}
+                        <li class="nav-item active">
+                      {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="#">lessons</a>
+                      {% endif %}
+                          <a class="nav-link" href="{% url 'contact' %}">contact</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">community</a>
-                        </li>
+                  </ul>
 
-                        {% if request.path == article_list %}
-                          <li class="nav-item active">
-                        {% else %}
+                  <!--Login navigation...-->
+                  {% if user.is_authenticated %}
+                      <ul class="nav navbar-nav">
                           <li class="nav-item">
-                        {% endif %}
-                            <a class="nav-link" href="{% url 'articles:article_list' %}">blog</a>
-                        </li>
-
-                        {% if request.path == contact %}
-                          <li class="nav-item active">
-                        {% else %}
-                          <li class="nav-item">
-                        {% endif %}
-                            <a class="nav-link" href="{% url 'contact' %}">contact</a>
+                            <img src="{{user.avatar.url}}" alt="{{user.username}}" class="rounded-circle avatar img-raised" style="width:25px; height:25px">
+                            <span>{{user.username}}</span>
                           </li>
-                    </ul>
+                          {% if user.is_staff %}
+                          <li class="nav-item">
+                              <a class="nav-link" href="{% url 'articles:article_dashboard' %}">
+                                  <i class="fa fa-th"></i>
+                              </a>
+                          </li>
+                          {% endif %}
+                      </ul>
+                  {% else %}
+                  <ul class="nav navbar-nav">
+                      <li class="nav-item">
+                          <a class="nav-link" href="#">
+                              <i class="fa fa-user"></i>
+                              login
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="#">
+                              <i class="fa fa-user-plus"></i>
+                              register
+                          </a>
+                      </li>
+                  </ul>
+                  {% endif %}
 
-                    <!--Login navigation...-->
-                    {% if user.is_authenticated %}
-                        <div class="author">
-                             <img src="{{user.avatar.url}}" alt="{{user.username}}" class="rounded-circle avatar img-raised" style="width:25px; height:25px">
-                             <span>@{{user.username}}</span>
-                        </div>
-                    {% else %}
-                    <ul class="nav navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fa fa-user"></i>
-                                login
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fa fa-user-plus"></i>
-                                register
-                            </a>
-                        </li>
-                    </ul>
-                    {% endif %}
 
+              </div>
+          </div>
+      </nav>
 
-                </div>
-            </div>
-        </nav>
+{% endif %}

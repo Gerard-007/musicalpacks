@@ -1,4 +1,40 @@
 {% load static %}
+{% url 'articles:article_dashboard' as article_dashboard %}
+
+
+{% if request.path == article_dashboard %}
+<footer class="footer">
+  <div class="container-fluid">
+    <nav>
+      <ul>
+        <li>
+          <a href="https://www.musicadence.com">
+            Musicadence Team
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'contact' %}">
+            Contact Us
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'articles:article_list' %}">
+            Blog
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="copyright">
+      &copy;
+      <script>
+        document.write(new Date().getFullYear())
+      </script>, Designed by
+      <a href="https://www.geetech.com" target="_blank">Geetech</a>. Coded by
+      <a href="https://www.geetech.com/team" target="_blank">geetechcypher@gmail.com</a>.
+    </div>
+  </div>
+</footer>
+{% else %}
 
 
   <!--     *********    FOOTER 1      *********      -->
@@ -124,3 +160,4 @@
 
   </footer>
   <!--     *********    ENDFOOTER    *********      -->
+{% endif %}

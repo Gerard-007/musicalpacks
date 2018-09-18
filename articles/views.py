@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.views import generic
+from django.views import View
 # from django.views.generic import CreateView, ListView
 
 #from . import mixins
@@ -16,6 +17,13 @@ class ArticleList(generic.CreateView, generic.ListView):
 	context_object_name = 'articles'
 	paginate_by = 6
 	template_name = "articles/article_list.html"
+
+class DashBoard(View):
+	def get(self, request, *args, **kwargs):
+		view = ArticleList.as_view(
+			template_name = "articles/admin_page.html"
+		)
+		return view(request, *args, **kwargs)
 
 class ArticleDetail(generic.DetailView, generic.UpdateView):
 	fields = ("author", "title", "body", "published")
