@@ -2,6 +2,13 @@
 {% load staticfiles %}
 
 {% block title %}Dashboard{% endblock %}
+{% block dashboard_style %}<link href="{% static 'css/now-ui-dashboard.css' %}" rel="stylesheet" />{% endblock dashboard_style %}
+{% block dashboard_scripts %}
+<script src="{% static 'js/now-ui-dashboard.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/plugins/bootstrap-notify.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/plugins/chartjs.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/plugins/perfect-scrollbar.jquery.min.js' %}" type="text/javascript"></script>
+{% endblock dashboard_scripts %}
 
 {% block content %}
 <div class="wrapper ">
