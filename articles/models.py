@@ -69,6 +69,14 @@ class Article(models.Model):
     #         return self.image
     #     return default_path
 
+    @property
+    def image_url(self):
+        if self.image:
+            return self.image.url
+        else:
+            return 'https://res.cloudinary.com/hwz12fud7/image/upload/v1538131159/media/musicadence/musicadence.jpg'
+            # return "static/img/icons/musicadence.png"
+
     """ Informative name for model """
     def __unicode__(self):
         try:
