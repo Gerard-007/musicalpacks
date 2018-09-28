@@ -7,6 +7,8 @@ from django.contrib.auth.models import (
 from django.utils import timezone
 
 
+# default_path="https://res.cloudinary.com/hwz12fud7/image/upload/v1537132883/media/Gerard%20Nwazk/musicadence_fpdfvb.jpg"
+
 def upload_dir(instance, filename):
     return "{}/{}".format(instance.username, filename)
 
@@ -51,7 +53,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=40, unique=True)
     bio = models.CharField(max_length=240, blank=True, default="")
-    avatar = models.ImageField(upload_to=upload_dir, blank=True, null=True)
+    avatar = models.ImageField(blank=True, null=True, upload_to=upload_dir)
+    follow_count = models.PositiveIntegerField(default=0)
     date_joined = models.DateTimeField(auto_now_add=True,)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -64,10 +67,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):              # __unicode__ on Python 2
         return "@{}".format(self.username)
 
-    def get_img_url(self, default_path="../img/icons/musicadence.jpg"):
-        if self.image:
-            return self.image
-        return default_path
+    @property
+    def image_url(self):
+        if self.avatar:
+            return self.avatar.url
+        else:
+            return "static/img/icons/musicadence.png"
 
     def get_full_name(self):
         # The user is identified by their

@@ -72,6 +72,8 @@ INSTALLED_APPS = [
     'pagedown',
     'ckeditor',
     'ckeditor_uploader',
+    'crispy_forms',
+    'bootstrap3',
 
     # My Apps
     'accounts',
@@ -169,7 +171,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 #Login redirect url
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'home'
 
 # cloudinary media setups for images and videos
 MEDIA_URL = '/media/'
@@ -202,3 +204,5 @@ CKEDITOR_CONFIGS = {
         'extraPlugins': 'codesnippet',
     }
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -1,11 +1,8 @@
 from django import forms
 from django.forms import ModelForm
-from pagedown.widgets import PagedownWidget
 from articles.models import Article, Comment, Category
 
 class ArticleForm(forms.ModelForm):
-    published = forms.DateTimeField(widget=forms.SelectDateWidget)
-
     class Meta:
         model = Article
         fields = ("category",
@@ -14,7 +11,11 @@ class ArticleForm(forms.ModelForm):
                     "body",
                     "draft",)
 
+# class CommentForm(forms.Form):
+#     content = forms.CharField(widget=forms.Textarea)
+
 class CommentForm(forms.ModelForm):
+    content = forms.CharField(widget=forms.Textarea)
     class Meta:
         model = Comment
-        fields = ('body',)
+        fields = ('content',)

@@ -2,12 +2,11 @@
 {% load static %}
 {% load cloudinary %}
 
-
     <html lang="en">
 
     <head>
         <meta charset="utf-8" />
-        <link rel="shortcut icon" type="image/png" style="width:70px; height:40px;" href="{% static 'img/icons/musicadence.jpg' %}">
+        <link rel="shortcut icon" type="image/png" href="https://res.cloudinary.com/hwz12fud7/image/upload/c_scale,h_400,w_700/v1537993901/media/musicadence/musicadence.png">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
         <title>{% block title %}{% endblock title %} | musicadence</title>
@@ -30,15 +29,13 @@
 
         {% block dashboard_style %}{% endblock dashboard_style %}
 
-        <!-- CSS Just for demo purpose, don't include it in your project
-        <link href="{% static 'css/demo.css' %}" rel="stylesheet" /> -->
-
         <!-- Ck-editor code design links -->
         <link rel="stylesheet"
         href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script>
     </head>
+
 
 
     <body>

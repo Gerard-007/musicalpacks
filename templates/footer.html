@@ -1,8 +1,12 @@
 {% load static %}
 {% url 'articles:article_dashboard' as article_dashboard %}
+{% url 'login' as login %}
+{% url 'accounts:signup' as signup %}
+{% url 'accounts:logout' as logout %}
+{% url 'password_reset' as reset %}
 
 
-{% if request.path == article_dashboard %}
+{% if request.path == article_dashboard or request.path == signup or request.path == logout or request.path == login or request.path == reset %}
     <footer class="footer">
       <div class="container-fluid">
         <nav>

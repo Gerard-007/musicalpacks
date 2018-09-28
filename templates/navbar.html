@@ -3,6 +3,7 @@
 {% url 'articles:article_list' as article_list %}
 {% url 'articles:article_dashboard' as article_dashboard %}
 {% url 'contact' as contact %}
+{% url 'articles:article_create' as article_create %}
 
 
 {% if request.path == article_dashboard %}
@@ -43,7 +44,7 @@
   </div>
   <div class="main-panel">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-info fixed-top">
       <div class="container-fluid">
         <div class="navbar-wrapper">
           <div class="navbar-toggle">
@@ -74,8 +75,7 @@
           <ul class="navbar-nav">
             <li class="nav-item">
               <div class="author">
-                   <img src="{{user.avatar.url}}" alt="{{user.username}}" class="rounded-circle avatar img-raised" style="width:25px; height:25px">
-                   <span>{{user.username}}</span>
+                  <img src="{{user.avatar.url}}" alt="{{user.username}}" class="rounded-circle avatar img-raised" style="width:25px; height:25px">
               </div>
             </li>
             <li class="nav-item">
@@ -93,20 +93,27 @@
     <!-- End Navbar -->
     <div class="panel-header panel-header-sm">
     </div>
+
 {% else %}
 
   <!--     *********     HEADER 1      *********      -->
 
   <div class="header-1">
-      <nav class="navbar navbar-expand-lg navbar-transparent bg-primary navbar-absolute">
+    {% if request.path == article_create %}
+        <nav class="navbar navbar-expand-lg bg-info navbar-absolute" >
+    {% else %}
+        <nav class="navbar navbar-expand-lg navbar-transparent bg-primary navbar-absolute">
+    {% endif %}
+
           <div class="container">
               <div class="navbar-translate">
+                <a class="navbar-brand text-left" href="{% url 'home' %}"><img src="{% static 'img/icons/musicadence.png' %}" style="width:80px; height:50px;" alt="musicadence.com"> musicadence</a>
+
                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar-primary" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-bar bar1"></span>
                       <span class="navbar-toggler-bar bar2"></span>
                       <span class="navbar-toggler-bar bar3"></span>
                   </button>
-                  <a class="navbar-brand text-left" href="#geetech"><img src="{% static 'img/icons/musicadence.png' %}" style="width:80px; height:50px;" alt="musicadence.com"> musicadence</a>
               </div>
 
               <div class="collapse navbar-collapse" id="example-navbar-primary">
@@ -148,27 +155,39 @@
                   {% if user.is_authenticated %}
                       <ul class="nav navbar-nav">
                           <li class="nav-item">
-                            <img src="{{user.avatar.url}}" alt="{{user.username}}" class="rounded-circle avatar img-raised" style="width:25px; height:25px">
-                            <span>{{user.username}}</span>
+                            {% if user.avatar.url %}
+                            <a href="#">
+                                <img src="{{user.avatar.url}}" alt="{{user.username}}" class="rounded-circle avatar img-raised" style="width:25px; height:25px">
+                            </a>
+                            {% else %}
+                            <a href="#" class="btn-tooltip" data-toggle="tooltip">
+                               <img src="{% static 'img/icons/musicadence.png' %}" alt="{{user.username}}" class="rounded-circle avatar img-raised" style="width:25px; height:25px">
+                            </a>
+                            {% endif %}
                           </li>
                           {% if user.is_staff %}
                           <li class="nav-item">
-                              <a class="nav-link" href="{% url 'articles:article_dashboard' %}">
+                              <a class="nav-link btn-tooltip" href="{% url 'articles:article_dashboard' %}" data-toggle="tooltip" data-placement="top" title="admin dashboard" data-container="body" data-animation="true"  data-delay="100">
                                   <i class="fa fa-th"></i>
                               </a>
                           </li>
                           {% endif %}
+                          <li class="nav-item">
+                              <a class="nav-link btn-tooltip" href="{% url 'accounts:logout' %}" data-toggle="tooltip" data-placement="top" title="logout" data-container="body" data-animation="true"  data-delay="100">
+                                  <i class="fa fa-sign-out"></i>
+                              </a>
+                          </li>
                       </ul>
                   {% else %}
                   <ul class="nav navbar-nav">
                       <li class="nav-item">
-                          <a class="nav-link" href="#">
-                              <i class="fa fa-user"></i>
+                          <a class="nav-link" href="{% url 'login' %}">
+                              <i class="fa fa-sign-in"></i>
                               login
                           </a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="#">
+                          <a class="nav-link" href="{% url 'accounts:signup' %}">
                               <i class="fa fa-user-plus"></i>
                               register
                           </a>

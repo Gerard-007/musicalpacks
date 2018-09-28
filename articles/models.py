@@ -44,26 +44,30 @@ class Article(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255, null=True)
-    image = models.ImageField(upload_to=upload_dir, blank=True, null=True)
+    image = models.ImageField(upload_to=upload_dir, height_field='photo_height', width_field='photo_width', blank=True, null=True)
+    photo_height = models.PositiveIntegerField(blank = True, default = 0)
+    photo_width = models.PositiveIntegerField(blank = True, default = 0)
     slug = models.SlugField(max_length=255)
+    # body = models.TextField(blank=True, null=True)
     body = RichTextField(blank=True, null=True)
+    view_count = models.PositiveIntegerField(default=0)
     created = models.DateTimeField(default=timezone.now)
     draft = models.BooleanField(default=True)
-    published = models.DateTimeField(blank=True, null=True)
+    # published = models.DateTimeField(blank=True, null=True)
     category = models.ForeignKey(Category)
     objects = ArticleManager()
 
-    def publish(self):
-        self.published_date = timezone.now()
-        self.save()
+    # def publish(self):
+    #     self.published_date = timezone.now()
+    #     self.save()
 
     def __str__(self):
         return self.title
 
-    def get_img_url(self, default_path="../img/icons/musicadence.jpg"):
-        if self.image:
-            return self.image
-        return default_path
+    # def get_img_url(self, default_path="static/img/icons/musicadence.jpg"):
+    #     if self.image:
+    #         return self.image
+    #     return default_path
 
     """ Informative name for model """
     def __unicode__(self):
@@ -74,10 +78,10 @@ class Article(models.Model):
             return "Photo <{}:{}>".format(self.title, public_id)
 
     def get_absolute_url(self):
-        return reverse("articles:article_detail", kwargs={"slug": self.slug})
+        return reverse("articles:article_detail", args=[self.slug])
 
     class Meta:
-        ordering = ('-published',)
+        ordering = ('-created',)
         unique_together = ["slug", "title",]
         db_table = "article"
 
@@ -102,19 +106,23 @@ pre_save.connect(article_pre_save_signal, sender=Article)
 
 class Comment(models.Model):
     article = models.ForeignKey(Article, related_name="comments")
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     #settings.AUTH_USER_MODEL, default=1
-    email = models.EmailField()
-    body = models.TextField()
-    created = models.DateTimeField(auto_now_add=True)
+    content = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=False)
 
     def approved(self):
     	self.approved = True
     	self.save()
 
-    def __str__(self):
-        return self.user
+    # def __str__(self):
+    #     return self.by
+    #
+    # def __str__(self):
+    #     if self.by==None:
+    #         return "ERROR-USER NAME IS NULL"
+    #     return self.by
 
     class Meta:
-        ordering = ['created']
+        ordering = ['created_on']

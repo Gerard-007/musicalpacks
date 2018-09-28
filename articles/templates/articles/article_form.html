@@ -1,15 +1,46 @@
 {% extends "layout.html" %}
 {% load widget_tweaks %}
+{% load static %}
+{% load bootstrap3 %}
 
 {% block title %}article_create{% endblock title %}
 
 {% block content %}
 <!-- Material input -->
-    <form method="POST" action="">
-      {% csrf_token %}
-      {{form.as_p}}
-      <button type="submit" class="btn btn-primary btn-md" value="save">
-        <i class="fa fa-send">save</i>
-      </button>
-    </form>
+
+
+      <!--     *********     HEADER 1      *********      -->
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+
+            <div class="container">
+                <div class="row">
+
+                  <div class="card col-md-8 ml-auto mr-auto" style="background:#757575;">
+                    <br>
+                    <br>
+                    <form method="POST" action="" class="header-filter">
+                      {% csrf_token %}
+                      <br>
+                      <br>
+                      {% bootstrap_form form%}
+                      <br>
+                      <br>
+
+                      <button type="submit" class="btn btn-info btn-md" value="save">
+                        <i class="fa fa-save"></i>
+                        save
+                      </button>
+                    </form>
+                    </div>
+
+                </div>
+              </div>
+
+<!--     *********    END HEADER 1      *********      -->
+
 {% endblock %}

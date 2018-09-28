@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% load staticfiles %}
+{% load widget_tweaks %}
 
 {% block title %}article_detail{% endblock title %}
 
@@ -9,7 +10,7 @@
   <div class="wrapper">
 
         <div class="page-header page-header-small">
-          <div class="page-header-image" data-parallax="true" style="background-image: url('{{ article.get_img_url.url }}') ;">
+          <div class="page-header-image" data-parallax="true" style="background-image: url('{{ article.image.url }}') ;">
           </div>
 
           <div class="content-center">
@@ -17,7 +18,7 @@
                   <div class="col-md-8 ml-auto mr-auto text-center">
                     <div class="page-cover-overlay">
                       <h2 class="title">{{article.title}}</h2>
-                      <h4>{{article.description|safe|linebreaks}}</h4>
+                      <h4>{{article.description|safe|truncatewords:10}}</h4>
                     </div>
                   </div>
               </div>
@@ -30,6 +31,12 @@
                   <div class="row">
                       <div class="col-md-8 ml-auto mr-auto">
                           <h3 class="title">{{article.title}}</h3>
+                          <p>{{ article.description|safe|linebreaks }}</p>
+
+                          <br>
+                          <br>
+                          <br>
+
                           <p>{{ article.body|safe|linebreaks }}</p>
                       </div>
                   </div>
@@ -48,17 +55,19 @@
                                       <span class="badge badge-info"> {{article.category}}</span>
                                   </div>
                               </div>
+                              <!--
                               <div class="col-md-6">
-                                  <a href="#pablo" class="btn btn-google btn-round pull-right">
+                                  <a href="#geetech" class="btn btn-google btn-round pull-right">
                                       <i class="fa fa-google"></i> 232
                                   </a>
-                                  <a href="#pablo" class="btn btn-twitter btn-round pull-right">
+                                  <a href="#geetech" class="btn btn-twitter btn-round pull-right">
                                       <i class="fa fa-twitter"></i> 910
                                   </a>
-                                  <a href="#pablo" class="btn btn-facebook btn-round pull-right">
+                                  <a href="#geetech" class="btn btn-facebook btn-round pull-right">
                                       <i class="fa fa-facebook-square"></i> 872
                                   </a>
                               </div>
+                            -->
                           </div>
 
                           <hr />
@@ -67,7 +76,7 @@
                               <div class="row">
                                   <div class="col-md-2">
                                       <div class="card-avatar">
-                                          <a href="#pablo">
+                                          <a href="#geetech">
                                               <img class="img img-raised" src="{{article.author.avatar.url}}">
                                           </a>
                                       <div class="ripple-container"></div></div>
@@ -92,89 +101,59 @@
                   <div class="row">
                       <div class="col-md-8 ml-auto mr-auto">
                           <div class="media-area">
-                              <h3 class="title text-center">3 Comments</h3>
-                              <div class="media">
-                                  <a class="pull-left" href="#pablo">
-                                      <div class="avatar">
-                                          <img class="media-object img-raised" src="../assets/img/james.jpg" alt="..."/>
-                                      </div>
-                                  </a>
-                                  <div class="media-body">
-                                      <h5 class="media-heading">Tina Andrew <small class="text-muted">&middot; 7 minutes ago</small></h5>
+                            {% with comments.count as total_comments %}
+                              <h3 class="title text-center">{{ total_comments }} Comment{{ total_comments|pluralize }}</h3>
+                            {% endwith %}
 
-                                      <p>Chance too good. God level bars. I'm so proud of @LifeOfDesiigner #1 song in the country. Panda! Don't be scared of the truth because we need to restart the human foundation in truth I stand with the most humility. We are so blessed!</p>
-                                      <p>All praises and blessings to the families of people who never gave up on dreams. Don't forget, You're Awesome!</p>
-
-                                      <div class="media-footer">
-                                          <a href="#pablo" class="btn btn-primary btn-neutral pull-right" rel="tooltip" title="Reply to Comment">
-                                              <i class="now-ui-icons ui-1_send"></i> Reply
-                                          </a>
-                                          <a href="#pablo" class="btn btn-danger btn-neutral pull-right">
-                                              <i class="now-ui-icons ui-2_favourite-28"></i> 243
-                                          </a>
-                                      </div>
-                                  </div>
-                              </div>
-
-                              <div class="media">
-                                <a class="pull-left" href="#pablo">
-                                    <div class="avatar">
-                                       <img class="media-object img-raised" alt="Tim Picture" src="../assets/img/michael.jpg">
-                                    </div>
-                                </a>
-                                <div class="media-body">
-                                   <h5 class="media-heading">John Camber <small class="text-muted">&middot; Yesterday</small></h5>
-
-                                   <p>Hello guys, nice to have you on the platform! There will be a lot of great stuff coming soon. We will keep you posted for the latest news.</p>
-                                   <p> Don't forget, You're Awesome!</p>
-
-                                   <div class="media-footer">
-                                       <a href="#pablo" class="btn btn-primary btn-neutral pull-right" rel="tooltip" title="Reply to Comment">
-                                           <i class="now-ui-icons ui-1_send"></i> Reply
-                                       </a>
-                                       <a href="#pablo" class="btn btn-danger btn-neutral pull-right">
-                                           <i class="now-ui-icons ui-2_favourite-28"></i> 25
-                                       </a>
-                                   </div>
-                                   <div class="media">
-                                        <a class="pull-left" href="#pablo">
-                                              <div class="avatar">
-                                                  <img class="media-object img-raised" alt="64x64" src="../assets/img/julie.jpg">
-                                              </div>
-                                        </a>
-                                        <div class="media-body">
-                                              <h5 class="media-heading">Tina Andrew <small class="text-muted">· 2 Days Ago</small></h5>
-
-                                              <p>Hello guys, nice to have you on the platform! There will be a lot of great stuff coming soon. We will keep you posted for the latest news.</p>
-                                              <p> Don't forget, You're Awesome!</p>
-
-                                              <div class="media-footer">
-                                                  <a href="#pablo" class="btn btn-primary btn-neutral pull-right" rel="tooltip" title="" data-original-title="Reply to Comment">
-                                                      <i class="now-ui-icons ui-1_send"></i> Reply
-                                                  </a>
-                                                  <a href="#pablo" class="btn btn-danger btn-neutral pull-right">
-                                                      <i class="now-ui-icons ui-2_favourite-28"></i> 2
-                                                  </a>
-                                              </div>
+                            {% for comment in comments %}
+                                <div class="media">
+                                    <a class="pull-left" href="#geetech">
+                                        <div class="avatar">
+                                            <img class="media-object img-raised" src="{{comment.by.avatar.url}}" alt="{{comment.by.username}}"/>
                                         </div>
-                                    </div>
-                                </div>
-                              </div>
-                          </div>
-                            <h3 class="title text-center">Post your comment</h3>
-                            <div class="media media-post">
-                                <a class="pull-left author" href="#pablo">
-                                    <div class="avatar">
-                                        <img class="media-object img-raised" alt="64x64" src="../assets/img/olivia.jpg">
-                                    </div>
-                                </a>
-                                <div class="media-body">
-                                        <textarea class="form-control" placeholder="Write a nice reply or go home..." rows="4"></textarea>
+                                    </a>
+                                    <div class="media-body">
+                                      <h4>{{comment.by.username}} | <small class="text-muted">{{comment.created_on}}</small></h4>
+                                        <p>{{comment.content}}</p>
+                                        <br>
+                                        <br>
+                                        <!--
                                         <div class="media-footer">
-                                            <a href="#pablo" class="btn btn-primary pull-right">
+                                            <a href="#geetech" class="btn btn-primary btn-neutral pull-right" rel="tooltip" title="Reply to Comment">
                                                 <i class="now-ui-icons ui-1_send"></i> Reply
                                             </a>
+                                            <a href="#geetech" class="btn btn-danger btn-neutral pull-right">
+                                                <i class="now-ui-icons ui-2_favourite-28"></i> 243
+                                            </a>
                                         </div>
+                                        -->
+                                    </div>
+                                </div>
+
+                            {% empty %}
+                                <h4 class="title text-center">No comment yet be the first to comment...</h3>
+                            {% endfor %}
+                          </div>
+
+                          <br>
+                          <br>
+                          <hr />
+
+                            <h3 class="title text-center">Post your comment</h3>
+                            <div class="media media-post">
+                                <a class="pull-left author" href="#geetech">
+                                    <div class="avatar">
+                                        <img class="media-object img-raised" alt="{{user.username}}" src="{{user.avatar.url}}">
+                                    </div>
+                                </a>
+                                <div class="media-body">
+                                  <form action="" method="post">
+                                    {% csrf_token %}
+                                    {{ form.content|attr:"name:form.body"|attr:"class:form-control"|attr:"rows:4" |attr:"placeholder:write your comments here..." }}
+                                    <div class="media-footer text-right">
+                                      <button type="submit" class="btn btn-info btn-simple btn-round"><i class="fa fa-reply"></i> reply</button>
+                                    </div>
+                                  </form>
                                 </div>
                             </div> <!-- end media-post -->
                       </div>
@@ -201,13 +180,13 @@
                                           <div class="col-md-7">
                                               <h6 class="category text-info">Enterprise</h6>
                                               <h3 class="card-title">
-                                                  <a href="#pablo">Warner Music Group buys concert discovery service Songkick</a>
+                                                  <a href="#geetech">Warner Music Group buys concert discovery service Songkick</a>
                                               </h3>
                                               <p class="card-description">
                                                   Warner Music Group announced today it’s acquiring the selected assets of the music platform Songkick, including its app for finding concerts and the company’s trademark.
                                               </p>
                                               <p class="author">
-                                                  by <a href="#pablo"><b>Sarah Perez</b></a>, 2 days ago
+                                                  by <a href="#geetech"><b>Sarah Perez</b></a>, 2 days ago
 
                                           </p></div>
                                       </div>
@@ -220,13 +199,13 @@
                                                   <i class="now-ui-icons now-ui-icons media-2_sound-wave"></i> Startup
                                               </h6>
                                               <h3 class="card-title">
-                                                  <a href="#pablo">Insticator raises $5.2M to help publishers</a>
+                                                  <a href="#geetech">Insticator raises $5.2M to help publishers</a>
                                               </h3>
                                               <p class="card-description">
                                                   Insticator is announcing that it has raised $5.2 million in Series A funding. The startup allows online publishers to add quizzes, polls and other interactive elements...
                                               </p>
                                               <p class="author">
-                                                  by <a href="#pablo"><b>Anthony Ha</b></a>, 5 days ago
+                                                  by <a href="#geetech"><b>Anthony Ha</b></a>, 5 days ago
 
                                           </p></div>
                                           <div class="col-md-5">
@@ -243,128 +222,11 @@
                   </div>
               </div>
           </div>
+          {% if user.is_superuser %}
+              <p><a href="{% url 'articles:article_update' slug=article.slug %}">Edit</a></p>
+          {% endif %}
       </div>
 
 </body>
-
-
-
-
-<!--Main layout-->
-    <main class="mt-5 pt-5">
-        <div class="container-fluid">
-
-            <!--Section: article-->
-            <section class="mt-4">
-
-              <!-- <div class="view">
-                  <img src="https://mdbootstrap.com/img/Photos/Others/forest-sm.jpg" class="img-fluid" alt="placeholder">
-                  <div class="mask flex-center waves-effect waves-light rgba-teal-strong">
-                      <p class="white-text">strong overlay</p>
-                  </div>
-              </div> -->
-
-                <!--Grid row-->
-                <div class="row">
-
-                    <!--Grid column-->
-                    <div class="col-md-8 mb-4">
-
-                        <!--Featured Image-->
-                        <div class="card mb-4 wow fadeIn">
-                            <img src="{{article.get_img_url.url}}" class="img-fluid" alt="{{article.title}}">
-                        </div>
-                        <!--/.Featured Image-->
-
-
-                        <!--Card-->
-                        <div class="card mb-4 wow fadeIn">
-                            <!--Card content-->
-                            <div class="card-body">
-                                <p class="h5 my-4">{{ article.title }}</p>
-                                <p>{{ article.body|safe|linebreaks }}</p>
-                            </div>
-                        </div>
-                        <!--/.Card-->
-
-                        <!--Card-->
-                        <div class="card mb-4 wow fadeIn">
-                            <div class="card-header font-weight-bold">
-                                <span>About Author</span>
-                                <span class="pull-right">
-                                    <a href="#" target="_blank">
-                                        <i class="fa fa-facebook mr-2"></i>
-                                    </a>
-                                    <a href="#" target="_blank">
-                                        <i class="fa fa-twitter mr-2"></i>
-                                    </a>
-                                    <a href="#" target="_blank">
-                                        <i class="fa fa-instagram mr-2"></i>
-                                    </a>
-                                    <a href="#" target="_blank">
-                                        <i class="fa fa-linkedin mr-2"></i>
-                                    </a>
-                                </span>
-                            </div>
-
-                            <!--Card content-->
-                            <div class="card-body">
-                                <div class="media d-block d-md-flex mt-3">
-                                    <img class="d-flex rounded-circle avatar z-depth-1-half mb-3 mx-auto" src="{{user.avatar.url}}" alt="{{article.author}}">
-                                    <div class="media-body text-center text-md-left ml-md-3 ml-0">
-                                        <h5 class="mt-0 font-weight-bold">{{article.author}}</h5>
-                                        {{user.bio}}
-                                    </div>
-                                </div>
-                            </div><!-- card-body -->
-
-                        </div>
-                        <!--/.Card-->
-
-                        comments goes here
-
-
-
-
-                    <!--Grid column-->
-                    <div class="col-md-4 mb-4">
-
-                        <!--Card : Dynamic content wrapper-->
-                        <div class="card mb-4 text-center wow fadeIn">
-
-                            newsletter goes here...
-
-                        </div>
-                        <!--/.Card : Dynamic content wrapper-->
-
-
-
-                        <!--Card-->
-                        <div class="card mb-4 wow fadeIn">
-
-                            similar articles goes here...
-
-                        </div>
-                        <!--/.Card-->
-
-                    </div>
-                    <!--Grid column-->
-
-
-                </div>
-                <!--Grid row-->
-
-            </section>
-            <!--Section: article-->
-
-            <hr width="50%">
-
-            {% if user.is_superuser %}
-                <p><a href="{% url 'articles:article_update' slug=article.slug %}">Edit</a></p>
-            {% endif %}
-
-        </div>
-    </main>
-    <!--Main layout-->
 
 {% endblock content %}

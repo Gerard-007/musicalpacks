@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from django.views.generic import FormView
-from . import views
-from .forms import ArticleForm
+from articles import views
+# from .forms import ArticleForm
 
 urlpatterns = [
 	url(r'^delete/(?P<slug>[\w-]+)/$', views.ArticleDelete.as_view(), name='article_delete'),

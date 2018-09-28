@@ -9,8 +9,8 @@ from .models import Article, Comment, Category
 admin.site.register(Category)
 
 class ArticleAdmin(admin.ModelAdmin):
-	list_display = ('author', 'title', 'published', 'category')
-	list_filter = ('author', 'created', 'published', 'category')
+	list_display = ('author', 'title', 'created', 'category')
+	list_filter = ('author', 'created', 'created', 'category')
 	search_field = ('title', 'body')
 	prepopulated_fields = {'slug': ('title',)}
 	# formfield_overrides = {
@@ -20,6 +20,6 @@ class ArticleAdmin(admin.ModelAdmin):
 admin.site.register(Article, ArticleAdmin)
 
 class CommentAdmin(admin.ModelAdmin):
-	list_display = ('user', 'email', 'body', 'approved')
+	list_display = ('by', 'content', 'approved')
 
 admin.site.register(Comment, CommentAdmin)

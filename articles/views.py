@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.views import generic
 from django.views import View
 # from django.views.generic import CreateView, ListView
 
 #from . import mixins
+from .forms import ArticleForm, CommentForm
 from .models import Category, Article, Comment
 
 
 
 class ArticleList(generic.CreateView, generic.ListView):
-	fields = ("author", "title", "body", "published")
+	fields = ("author", "title", "body", "created")
 	model = Article
 	context_object_name = 'articles'
 	paginate_by = 6
@@ -25,16 +27,50 @@ class DashBoard(View):
 		)
 		return view(request, *args, **kwargs)
 
-class ArticleDetail(generic.DetailView, generic.UpdateView):
-	fields = ("author", "title", "body", "published")
+class ArticleDisplay(generic.DetailView, generic.UpdateView):
+	fields = ("category", "title", "image", "body", "draft")
 	model = Article
 	context_object_name = 'article'
 	template_name = 'articles/article_detail.html'
 
+	def get_object(self):
+		object = super(ArticleDisplay, self).get_object()
+		object.view_count += 1
+		object.save()
+		return object
+
+	def get_context_data(self, **kwargs):
+		context = super(ArticleDisplay, self).get_context_data(**kwargs)
+		context['comments'] = Comment.objects.filter(article=self.get_object())
+		context['form'] = CommentForm
+		return context
+
+class ArticleComment(LoginRequiredMixin, generic.FormView):
+	form_class = CommentForm
+	template_name = 'articles/article_detail.html'
+
+	def form_valid(self, form):
+		form.instance.by = self.request.user
+		article = Article.objects.get(slug=self.kwargs['slug'])
+		form.instance.article = article
+		form.save()
+		return super(ArticleComment, self).form_valid(form)
+
+	def get_success_url(self):
+		return reverse('articles:article_detail', kwargs={'slug': self.kwargs['slug']})
+
+class ArticleDetail(View):
+	def get(self, request, *args, **kwargs):
+		view = ArticleDisplay.as_view()
+		return view(request, *args, **kwargs)
+
+	def post(self, request, *args, **kwargs):
+		view = ArticleComment.as_view()
+		return view(request, *args, **kwargs)
+
 class ArticleCreate(LoginRequiredMixin, generic.CreateView):
-	fields = ("category", "title", "body", "published")
 	model = Article
-	template_name = 'articles/article_form.html'
+	fields = ("category", "title", "image", "body", "draft")
 
 	def form_valid(self, form):
 		form.instance.author = self.request.user
@@ -42,9 +78,8 @@ class ArticleCreate(LoginRequiredMixin, generic.CreateView):
 		return super(ArticleCreate, self).form_valid(form)
 
 class ArticleUpdate(LoginRequiredMixin, generic.UpdateView):
-	fields = ("category", "title", "body", "published")
 	model = Article
-	template_name = 'articles/article_form.html'
+	fields = ("category", "title", "image", "body", "draft")
 
 	# Here we print out the name of the page updated
 	def get_page_title(self):
@@ -53,25 +88,17 @@ class ArticleUpdate(LoginRequiredMixin, generic.UpdateView):
 
 class ArticleDelete(LoginRequiredMixin, generic.DeleteView):
 	model = Article
-	success_url = reverse_lazy("articles:list")
+	success_url = reverse_lazy("article_dashboard")
 	# Here we overide the delete function to only work if a user is a superuser
 	def get_queryset(self):
 		if not self.request.user.is_superuser:
 			return self.model.objects.filter(author=self.request.user)
 		return self.model.objects.all()
 
-class CreateArticleComment(generic.CreateView):
-	model = Comment
-	fields = ('body',)
-	context_object_name = 'comments'
 
-	def post_valid(self, form):
-		article = get_object_or_404(Article, slug=article.slug)
-		articlecomment = form.save(commit=False)
-		articlecomment.user = self.request.user
-		articlecomment.article = article
-		articlecomment.save()
-		return redirect('articles:article_detail', slug=article.slug)
+class ArticleCategory(generic.ListView):
+	model = Article
 
-	def get_success_url(self):
-		return reverse_lazy('articles:article_list')
+	def get_queryset(self):
+		category = get_object_or_404(Category, slug=self.kwargs['slug'])
+		return Article.object.filter()
