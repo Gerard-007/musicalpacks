@@ -72,7 +72,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         if self.avatar:
             return self.avatar.url
         else:
-            return "static/img/icons/musicadence.png"
+            return 'https://res.cloudinary.com/hwz12fud7/image/upload/v1538131159/media/musicadence/musicadence.jpg'
+            # return "static/img/icons/musicadence.png"
 
     def get_full_name(self):
         # The user is identified by their
