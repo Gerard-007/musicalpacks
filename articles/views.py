@@ -14,7 +14,7 @@ from .models import Category, Article, Comment
 
 
 class ArticleList(generic.CreateView, generic.ListView):
-	fields = ("author", "title", "body", "created")
+	fields = ("category", "title", "description", "image", "body", "draft")
 	model = Article
 	context_object_name = 'articles'
 	paginate_by = 6
@@ -28,7 +28,7 @@ class DashBoard(View):
 		return view(request, *args, **kwargs)
 
 class ArticleDisplay(generic.DetailView, generic.UpdateView):
-	fields = ("category", "title", "image", "body", "draft")
+	fields = ("category", "title", "description", "image", "body", "draft")
 	model = Article
 	context_object_name = 'article'
 	template_name = 'articles/article_detail.html'
@@ -70,7 +70,7 @@ class ArticleDetail(View):
 
 class ArticleCreate(LoginRequiredMixin, generic.CreateView):
 	model = Article
-	fields = ("category", "title", "image", "body", "draft")
+	fields = ("category", "title", "description", "image", "body", "draft")
 
 	def form_valid(self, form):
 		form.instance.author = self.request.user
@@ -79,7 +79,7 @@ class ArticleCreate(LoginRequiredMixin, generic.CreateView):
 
 class ArticleUpdate(LoginRequiredMixin, generic.UpdateView):
 	model = Article
-	fields = ("category", "title", "image", "body", "draft")
+	fields = ("category", "title", "description", "image", "body", "draft")
 
 	# Here we print out the name of the page updated
 	def get_page_title(self):
@@ -98,7 +98,13 @@ class ArticleDelete(LoginRequiredMixin, generic.DeleteView):
 
 class ArticleCategory(generic.ListView):
 	model = Article
+	template_name = "articles/article_category.html"
 
 	def get_queryset(self):
-		category = get_object_or_404(Category, slug=self.kwargs['slug'])
-		return Article.object.filter()
+		self.category = get_object_or_404(Category, pk=self.kwargs['pk'])
+		return Article.objects.filter(category=self.category)
+
+	def get_context_data(self, **kwargs):
+		context = super(ArticleCategory, self).get_context_data(**kwargs)
+		context['category'] = self.category
+		return context

@@ -7,9 +7,13 @@ class ArticleForm(forms.ModelForm):
         model = Article
         fields = ("category",
                     "title",
+                    "description",
                     "image",
                     "body",
                     "draft",)
+        widgets = {
+            'image': forms.FileInput(attrs={'class': 'btn btn-raised btn-round btn-default btn-file'}),
+        }
 
 # class CommentForm(forms.Form):
 #     content = forms.CharField(widget=forms.Textarea)

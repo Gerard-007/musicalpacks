@@ -29,6 +29,9 @@ class ArticleManager(models.Manager):
 
 class Category(models.Model):
 	name = models.CharField(max_length=100, unique=True)
+    # cat_icon = models.ImageField(upload_to=upload_dir, height_field='photo_height', width_field='photo_width', blank=True, null=True)
+    # photo_height = models.PositiveIntegerField(blank = True, default = 400)
+    # photo_width = models.PositiveIntegerField(blank = True, default = 800)
 	creator = models.ForeignKey(settings.AUTH_USER_MODEL)
 
 	class Meta:
@@ -44,9 +47,7 @@ class Article(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255, null=True)
-    image = models.ImageField(upload_to=upload_dir, height_field='photo_height', width_field='photo_width', blank=True, null=True)
-    photo_height = models.PositiveIntegerField(blank = True, default = 400)
-    photo_width = models.PositiveIntegerField(blank = True, default = 800)
+    image = models.ImageField(upload_to=upload_dir, blank=True, null=True)
     slug = models.SlugField(max_length=255)
     # body = models.TextField(blank=True, null=True)
     body = RichTextField(blank=True, null=True)
@@ -64,10 +65,12 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
+    # @property
     # def get_img_url(self, default_path="static/img/icons/musicadence.jpg"):
     #     if self.image:
-    #         return self.image
-    #     return default_path
+    #         return self.image.url
+    #     else:
+    #         return default_path
 
     @property
     def image_url(self):
@@ -95,16 +98,16 @@ class Article(models.Model):
 
 
 def article_pre_save_signal(sender, instance, *args, **kwargs):
-    # instance = "Second Post" -- post title
+    # instance = "Second Article" -- Article title
     if not instance.slug:
         instance.slug = slugify(instance.title)
         new_slug = "{}-{}" .format(instance.title, instance.id)
         try:
             slug_exists = Article.objects.get(slug=instance.slug)
             instance.slug = slugify(new_slug)
-        except Post.DoesNotExist:
+        except Article.DoesNotExist:
             instance.slug = instance.slug
-        except Post.MultipleObjectsReturned:
+        except Article.MultipleObjectsReturned:
             instance.slug = slugify(new_slug)
         except:
             pass

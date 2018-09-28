@@ -4,6 +4,7 @@
 {% url 'articles:article_dashboard' as article_dashboard %}
 {% url 'contact' as contact %}
 {% url 'articles:article_create' as article_create %}
+{% url 'articles:article_update' as article_update %}
 
 
 {% if request.path == article_dashboard %}
@@ -99,7 +100,7 @@
   <!--     *********     HEADER 1      *********      -->
 
   <div class="header-1">
-    {% if request.path == article_create %}
+    {% if request.path == article_create or request.path == article_update %}
         <nav class="navbar navbar-expand-lg bg-info navbar-absolute" >
     {% else %}
         <nav class="navbar navbar-expand-lg navbar-transparent bg-primary navbar-absolute">
@@ -128,10 +129,10 @@
                       </li>
 
                       <li class="nav-item">
-                          <a class="nav-link" href="#">lessons</a>
+                          <a class="nav-link" href="#we_will_be_back">lessons</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="#">community</a>
+                          <a class="nav-link" href="#we_will_be_back">community</a>
                       </li>
 
                       {% if request.path == article_list %}

@@ -25,6 +25,15 @@
               <div class="card-header">
                 <h4 class="card-title"> Table on Plain Background</h4>
                 <p class="category"> Here is a subtitle for this table</p>
+
+                <h6>
+                  <button class="btn btn-info btn-round" type="button">
+                           <a href="{% url 'articles:article_create' %}">
+                             <i class="fa fa-plus-circle"></i>
+                             Create an article</a>
+						      </button>
+              </h6>
+
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -45,7 +54,9 @@
                                 <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm ">
                                   <a href="{% url 'articles:article_update' article.slug %}">
                                     <i class="fa fa-pencil"></i>
-                                  </a>                                </button>
+                                  </a>
+                                </button>
+
                                 <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm ">
                                   <a href="{% url 'articles:article_delete' article.slug %}"></a>
                                   <i class="fa fa-trash"></i>

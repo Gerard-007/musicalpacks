@@ -4,6 +4,7 @@ from articles import views
 # from .forms import ArticleForm
 
 urlpatterns = [
+	url(r'^category/(?P<pk>[\w-]+)/$', views.ArticleCategory.as_view(), name='article_category'),
 	url(r'^delete/(?P<slug>[\w-]+)/$', views.ArticleDelete.as_view(), name='article_delete'),
 	url(r'^update/(?P<slug>[\w-]+)/$', views.ArticleUpdate.as_view(), name='article_update'),
 	url(r'^dashboard/$', views.DashBoard.as_view(), name='article_dashboard'),
