@@ -19,7 +19,7 @@ def contact(request):
         name = contact_form.cleaned_data['name']
         phone = contact_form.cleaned_data['phone']
         subject = 'Contact email recieved from musicadence.com'
-        message = '{} {} {}'.format(name, comment,phone)
+        message = 'name: {} \n message: {} \n mobile: {}'.format(name, comment, phone)
         from_email = contact_form.cleaned_data['email']
         recipient_list = [settings.EMAIL_HOST_USER]
         send_mail(subject, message, from_email, recipient_list, fail_silently=False)

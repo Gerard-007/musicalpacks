@@ -1,0 +1,30 @@
+{% load humanize %}
+{% load static%}
+
+<div class="media">
+  <a class="pull-left" href="{% url 'posts:for_user' username=post.user.username %}">
+	  <div class="avatar">
+			<img class="media-object img-raised" alt="{{ post.user.username }} avatar" src="{{ post.user.image_url }}">
+	  </div>
+  </a>
+  <div class="media-body">
+		<h4 class="media-heading">
+			<small class="title"><a href="{% url 'posts:for_user' username=post.user.username %}">@{{ post.user.username }}</a></small>
+			<small class="text-muted"><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">posted {{ post.created_at|naturaltime }}</a></small>
+			{% if post.community %}
+			<small class="title text-muted">in <a href="#">{{ post.community.name }}</a></small>
+			{% endif %}
+		</h4>
+
+		<p>{{ post.message_html|safe }}</p>
+
+		<div class="media-footer">
+			{% if user.is_authenticated and post.user == user and not hide_delete %}
+				<a href="{% url 'posts:delete' pk=post.pk %}" title="delete" class="btn btn-danger btn-neutral pull-right">
+					<i class="fa fa-trash"></i> delete
+				</a>
+			{% endif %}
+		</div>
+  </div>
+</div>
+<hr>

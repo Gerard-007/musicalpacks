@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.humanize',
     'django.contrib.staticfiles',
 
     # Third Party apps
@@ -79,6 +80,8 @@ INSTALLED_APPS = [
     'accounts',
     'articles',
     'contacts',
+    'communities',
+    'posts',
 ]
 
 # ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'

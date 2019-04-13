@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% load humanize %}
 
 {% load staticfiles %}
 
@@ -9,6 +10,8 @@
   <div class="wrapper">
       <div class="page-header page-header-small">
         <div class="page-header-image" data-parallax="true" style="background-image: url('https://res.cloudinary.com/hoezb3yx8/image/upload/v1525869595/musicadence/imgs/Tutorial_music.jpg') ;">
+          <div class="transparent_png">
+          </div>
         </div>
         <div class="content-center">
             <div class="row">
@@ -60,7 +63,7 @@
                                     <br>
                                     <br>
                                     <div class="stats stats-left">
-                                          <i class="fa fa-calendar "></i> {{article.created}}
+                                          <i class="fa fa-calendar "></i> {{article.created|naturaltime}}
                                     </div>
                                     <div class="stats stats-right">
                                           <i class="fa fa-eye "></i> {{article.view_count}} views
@@ -79,7 +82,7 @@
                     </div><!-- row -->
               </div>
 
-          {% include "articles/pagination.html" %}
+          {% include "pagination.html" %}
           </div><!-- row -->
 
 

@@ -7,9 +7,10 @@
 {% url 'articles:article_update' as article_update %}
 
 
+
 {% if request.path == article_dashboard %}
 
-    <div class="sidebar" data-color="blue">
+  <div class="sidebar" data-color="blue">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
@@ -131,8 +132,13 @@
                       <li class="nav-item">
                           <a class="nav-link" href="#we_will_be_back">lessons</a>
                       </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="#we_will_be_back">community</a>
+
+                      {% if request.path == community_list %}
+                        <li class="nav-item active">
+                      {% else %}
+                        <li class="nav-item">
+                      {% endif %}
+                          <a class="nav-link" href="{% url 'communities:list' %}">community</a>
                       </li>
 
                       {% if request.path == article_list %}
@@ -156,7 +162,7 @@
                   {% if user.is_authenticated %}
                       <ul class="nav navbar-nav">
                           <li class="nav-item">
-                            <a href="#">
+                            <a class="nav-link btn-tooltip" href="#">
                                 <img src="{{user.image_url}}" alt="{{user.username}}" class="rounded-circle avatar img-raised" style="width:25px; height:25px">
                             </a>
                           </li>
@@ -174,25 +180,25 @@
                           </li>
                       </ul>
                   {% else %}
-                  <ul class="nav navbar-nav">
-                      <li class="nav-item">
-                          <a class="nav-link" href="{% url 'login' %}">
-                              <i class="fa fa-sign-in"></i>
-                              login
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="{% url 'accounts:signup' %}">
-                              <i class="fa fa-user-plus"></i>
-                              register
-                          </a>
-                      </li>
-                  </ul>
+                     <ul class="nav navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">
+                                <i class="fa fa-sign-in"></i>
+                                login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'accounts:signup' %}">
+                                <i class="fa fa-user-plus"></i>
+                                register
+                            </a>
+                        </li>
+                    </ul>
                   {% endif %}
 
 
               </div>
           </div>
       </nav>
-
+</div>
 {% endif %}

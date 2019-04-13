@@ -1,0 +1,214 @@
+{% extends "layout.html" %}
+{% block title %}community{% endblock %}
+
+
+{% block content %}
+<!--     *********     HEADER 3      *********      -->
+<div class="wrapper">
+  <div class="header-3">
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+                <div class="page-header header-filter">
+                    <div class="page-header-image" style="background-image: url('../static/img/banners/music_teachers.jpg');">
+                    	<div class="transparent_png">
+                    	</div>
+                    </div>
+                    <div class="content-center">
+                        <div class="container text-left">
+                            <div class="content-center">
+															<div class="row">
+																	<div class="col-md-8 ml-auto mr-auto text-center">
+                                    {% if user.is_authenticated %}
+                                        <h2 class="title">Welcome to our community {{user.username}}</h2>
+                                    {% else %}
+                                        <h2 class="title">Welcome to our community</h2>
+                                    {% endif %}
+																			<h4 class="description ">Here you can ask questions based on your music path, we ensure that your answers are answered by professionals or your fellow students.</h4>
+																			<br />
+																			<h5>Connect with us on:</h5>
+																			<div class="buttons">
+																					<a href="#geetechlab" class="btn btn-icon btn-neutral btn-danger btn-round mt-2">
+																							<i class="fa fa-twitter"></i>
+																					</a>
+																					<a href="#geetechlab" class="btn btn-icon btn-neutral btn-danger btn-round mt-2">
+																							<i class="fa fa-facebook-square"></i>
+																					</a>
+																					<a href="#geetechlab" class="btn btn-icon btn-neutral btn-danger btn-round mt-2">
+																							<i class="fa fa-google-plus"></i>
+																					</a>
+																					<a href="#geetechlab" class="btn btn-icon btn-neutral btn-danger btn-round  mt-2">
+																							<i class="fa fa-instagram"></i>
+																					</a>
+																			</div>
+                                      <br />
+                                      <h5 class="text-center">Scroll down to view previous asked questions or login to ask questions </h5>
+																	</div>
+															</div>
+															<!-- with youtube image
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="iframe-container">
+                                            <iframe height="250" src="https://www.youtube.com/embed/rmfmdKOLzVI?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 ml-auto mr-auto text-right">
+                                        <h1 class="title">Welcome to our community</h1>
+                                        <h4 class="description ">Here you can ask questions based on your music path, we ensure that your answers are answered by professionals or your fellow students.</h4>
+                                    </div>
+                                </div>
+															-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="page-header header-filter">
+                  <div class="page-header-image" style="background-image: url('../static/img/banners/piano_student.jpg');">
+                    <div class="transparent_png">
+                    </div>
+                  </div>
+                    <div class="content-center">
+                        <div class="container">
+                            <div class="content-center">
+                                <div class="row">
+                                    <div class="col-md-8 ml-auto mr-auto text-center">
+                                        <h2 class="title">We offer virtual guidance</h2>
+                                        <h4 class="description">We also supports video uploads so as to guide each students on how to take their lessons to another level</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="page-header header-filter">
+                  <div class="page-header-image" style="background-image: url('../static/img/banners/classical-music.jpg');">
+                    <div class="transparent_png">
+                    </div>
+                  </div>
+                    <div class="content-center">
+                        <div class="container">
+                            <div class="content-center">
+                                <div class="row">
+                                    <div class="col-md-6 text-left">
+                                        <h2 class="title">We also offer a peformance guidance</h2>
+                                        <h4 class="description ">Do you ever wonder how you can start your music practise, we will help out and a lot more.</h4>
+                                        <br />
+
+                                        <div class="buttons">
+                                            <a href="#geetechlab" class="btn btn-neutral btn-primary btn-lg mr-1">
+                                                <i class="now-ui-icons files_single-copy-04"></i> Read More..
+                                            </a>
+                                            <a href="#geetechlab" class="btn btn-primary btn-lg">
+                                                <i class="now-ui-icons arrows-1_share-66"></i> Subscribe
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <i class="fa fa-chevron-circle-left"></i>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <i class="fa fa-chevron-circle-right"></i>
+        </a>
+    </div>
+</div>
+
+<!--     *********    END HEADER 3      *********      -->
+
+
+<!--     *********     FEATURES 5      *********      -->
+
+  <div class="features-5">
+      <div class="container">
+          <div class="content-center">
+              <div class="row">
+                  <div class="col-md-12 text-center">
+                      <h2 class="title text-center ">Working is a pleasure</h2>
+                      <h4 class="description text-center">
+                        Musicadence communities are a great place to find other people that share your passions! Make friends,
+                        learn tips &amp; tricks, and more!</h4>
+                      <br />
+                  </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                  <div class="card card-blog">
+  										<div class="container">
+											  <div class="info info-horizontal">
+	                        <div class="icon icon-info">
+	                            <i class="flaticon-students-group-with-one-talking"></i>
+	                        </div>
+	                        <div class="description">
+	                            <h5 class="info-title">Here are the list of communities created so far...</h5>
+	                            <p>You can view all recent posts or ask a question...
+																	<span class="badge badge-info">
+                                    {% if user.is_authenticated %}
+                                        <a href="{% url 'posts:all' %}">Posts</a>
+                                    {% else %}
+                                        <a href="{% url 'login' %}">Posts</a>
+                                    {% endif %}
+																	</span>
+															</p>
+  	                        </div>
+    	                    </div>
+                        </div>
+                    </div>
+
+                  <div class="info info-horizontal">
+                    <div class="card card-blog">
+                      {% for community in object_list %}
+                          <div class="card-body">
+                            <h4 class="card-title"><a  href="{% url 'communities:single' slug=community.slug %}">{{ community.name }}</a></h4>
+                            <p class="card-description">{{ community.description_html|safe }}</p>
+                            <div class="card-footer">
+                               <div class="author">
+                                  <img src="{{ community.communities.image_url }}" alt="..." class="avatar img-raised">
+                                  <span>{{ community.role }}</span>
+                               </div>
+                               <div class="stats stats-right">
+                                 <span class="badge badge-info">{{ community.posts.count }} Answer{{ community.posts.count|pluralize }}</span>
+                               </div>
+                               <div class="stats stats-right">
+                                 <span class="badge badge-info">{{ community.members.count }} member{{ community.members.count|pluralize }}</span>
+                               </div>
+                            </div>
+                          </div>
+                          <hr />
+                      {% endfor %}
+                      {% include "pagination.html" %}
+                    </div>
+                  </div>
+
+              </div>
+          </div>
+        </div>
+
+    </div>
+  </div>
+
+    <!--     *********    END FEATURES 5      *********      -->
+
+{% endblock %}

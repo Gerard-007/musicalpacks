@@ -1,0 +1,39 @@
+<!--post_list.html...
+
+<h5 class="info-title">All Communities</h5>
+<p>{% get_other_communities as other_communities %}
+    {% for other_community in other_communities %}
+    <span class="badge badge-default">
+      <a href="{% url 'communities:single' slug=other_community.slug %}">{{ other_community.name }}</a>
+    </span>
+    {% endfor %}
+</p>
+-->
+
+
+
+
+<!--community_detail...
+
+<div class="container">
+  <h6 class="description text-left">members</h6>
+
+  {% for membership in community.good_members %}
+      <span class="badge badge-info">
+        <a href="{% url 'posts:for_user' username=membership.user.username %}">{{ membership.user.display_name }}</a>
+      </span>
+      {% if user.id in community.admins or user.id in community.moderators %}
+           {% if membership.user.id in community.moderators %}
+           <a href="{% url 'communities:change_status' slug=community.slug user_id=membership.user.id status=1 %}"><i class="fa fa-thumbs-down text-warning"></i></a>
+           {% endif %}
+           {% if membership.user.id not in community.moderators and membership.user.id not in community.admins %}
+           <a href="{% url 'communities:change_status' slug=community.slug user_id=membership.user.id status=2 %}"><i class="fa fa-thumbs-up text-warning"></i></a>
+           {% endif %}
+           {% if perms.communities.ban_member %}
+           <a href="{% url 'communities:change_status' slug=community.slug user_id=membership.user.id status=0 %}"><i class="fa fa-ban-circle text-danger"></i></a>
+           {% endif %}
+       {% endif %}
+  {% endfor %}
+
+</div>
+-->

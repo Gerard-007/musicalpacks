@@ -13,7 +13,10 @@
 <div class="signup-page" >
 
 		<div class="page-header section-image">
-		    <div class="page-header-image" style="background-image: url('https://res.cloudinary.com/hwz12fud7/image/upload/v1537993883/media/musicadence/choir.jpg');"></div>
+		    <div class="page-header-image" style="background-image: url('https://res.cloudinary.com/hwz12fud7/image/upload/v1537993883/media/musicadence/choir.jpg');">
+					<div class="transparent_png">
+					</div>
+		    </div>
 		        <div class="content">
 									<div class="container">
 										<div class="col-md-5 ml-auto mr-auto">
@@ -25,7 +28,7 @@
 											<h4>Login</h4>
 											<form method='POST' action="" class="card card-login card-plain">
 												{% csrf_token %}
-												{% bootstrap_form form%}
+												{% bootstrap_form form %}
 												<br>
 												<div class="card-footer text-center">
 													<input type='submit' value='login' class='btn btn-info btn-round btn-block'>

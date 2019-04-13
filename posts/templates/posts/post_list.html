@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% load community_tags   %}
+{% block title %}Recent Answers{% endblock title %}
+
+{% block content %}
+
+<!--     *********     FEATURES 5      *********      -->
+
+    <div class="features-5">
+        <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-5">
+								<div class="card card-blog">
+										<div class="container">
+											<div class="info info-horizontal">
+	                        <div class="icon icon-info">
+	                            <i class="flaticon-students-group-with-one-talking"></i>
+	                        </div>
+	                        <div class="description">
+	                            <h5 class="info-title">Your previously asked questions...</h5>
+	                            <p>
+																{% get_user_communities as user_communities %}
+																{% for member_community in user_communities %}
+																	<span class="badge badge-info">
+																		<a href="{% url 'communities:single' slug=member_community.community.slug %}">{{ member_community.community.name }}</a>
+																	</span>
+																{% endfor %}
+															</p>
+	                        </div>
+	                    </div>
+
+											<hr>
+
+											<div class="info info-horizontal">
+                        <div class="description">
+                          <h5 class="info-title">wish to ask a question?</h5>
+													<p>
+														{% if user.is_authenticated %}
+														<a href="{% url 'communities:create' %}" class="btn btn-primary btn-round"><i class="fa fa-plus-circle"></i> New questions</a>
+														{% endif %}
+													</p>
+                        </div>
+	                    </div>
+										</div>
+                </div>
+							</div>
+							<div class="col-md-7">
+								{% for post in post_list %}
+									{% include "posts/_post.html" %}
+								{% endfor %}
+							</div>
+            </div>
+        </div>
+    </div>
+
+    <!--     *********    END FEATURES 5      *********      -->
+
+{% endblock %}
