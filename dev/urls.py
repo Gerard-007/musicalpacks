@@ -37,6 +37,7 @@ urlpatterns = [
     url(r"^communities/", include("communities.urls", namespace="communities")),
     url(r"^ckeditor/", include("ckeditor_uploader.urls")),
 
+    url(r'^books/', include('books.urls', namespace='books')),
     url(r'^categories/', include('categories.urls', namespace='categories')),
 ]
 

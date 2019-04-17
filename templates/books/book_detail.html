@@ -1,0 +1,8 @@
+{{ object }} <br/>
+{{ object.description }} <br/>
+{{ object.price }}
+<hr/>
+<h4><em>Authors: Also Contributed</em></h4>
+{% for contrib_ in object.contributors.all %}
+    {{ contrib_ }}
+{% endfor %}

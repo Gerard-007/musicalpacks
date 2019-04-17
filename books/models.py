@@ -81,8 +81,8 @@ class Book(models.Model):
         else:
             return 'https://res.cloudinary.com/hwz12fud7/image/upload/v1538131159/media/musicadence/musicadence.jpg'
 
-    # def get_absolute_url(self):
-    #     return reverse("books:detail", kwargs={"slug": self.slug})
+    def get_absolute_url(self):
+        return reverse("books:detail", kwargs={"slug": self.slug})
 
 def pre_save_book_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
