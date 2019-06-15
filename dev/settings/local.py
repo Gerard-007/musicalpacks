@@ -17,16 +17,16 @@ import cloudinary.uploader
 import cloudinary.api
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'hwz12fud7',
-    'API_KEY': '314466862822259',
-    'API_SECRET': 'fzM2SW-kUAm8dcA3gvLIhO5IGu4'
+    'CLOUD_NAME': os.environ.get("CLOUDINARY_CLOUD_NAME", ''),
+    'API_KEY': os.environ.get("CLOUDINARY_API_KEY", ''),
+    'API_SECRET': os.environ.get("CLOUDINARY_API_SECRET", '')
 }
 
-SEND_GRID_API_KEY = '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'
+SEND_GRID_API_KEY = os.environ.get("SEND_GRID_API_KEY", '')
 EMAIL_HOST = 'smtp.sendgrid.net'
 # EMAIL_HOST = 'mail.musicadence.com'
-EMAIL_HOST_USER = 'geetechcypher@gmail.com'
-EMAIL_HOST_PASSWORD = '18nov1990'
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", '')
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", '')
 EMAIL_PORT = '25'
 EMAIL_USE_TLS = True
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
