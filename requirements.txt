@@ -20,7 +20,7 @@ idna==2.7
 misaka==2.1.0
 mock==2.0.0
 pbr==4.2.0
-Pillow==5.2.0
+Pillow==9.0.0
 pycparser==2.19
 python-dateutil==1.5
 python-http-client==3.1.0
